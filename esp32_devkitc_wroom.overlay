@@ -1,0 +1,23 @@
+/ {
+    aliases {
+        led0 = &external_led;
+		userbtn = &user_button;
+    };
+
+    leds {
+		compatible = "gpio-leds";
+
+		external_led: led_0 {
+			label = "External LED";
+			gpios = <&gpio0 25 GPIO_ACTIVE_HIGH>;
+		};
+	};
+
+	buttons {
+		compatible = "gpio-keys";
+		user_button: button_26 {
+			gpios = <&gpio0 26 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "USER Button";
+		};
+	};
+};

@@ -1,0 +1,24 @@
+# Config options for logger sample app
+
+# Copyright (c) 2018 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+mainmenu "Dronetag task"
+
+menu "Application configuration"
+
+config SHELL_FOREGROUND_CMDS
+	bool "Shell foreground commands example"
+	default y
+
+config SHELL_DYNAMIC_CMDS
+	bool "Shell dynamic commands example"
+	default y
+
+config MSGQ_SIZE
+    int "Message Queue Size"
+    default 10
+
+endmenu
+
+source "Kconfig.zephyr"
