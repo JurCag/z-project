@@ -1,4 +1,4 @@
-#include "../include/my_btn.h"
+#include "my_btn.h"
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
 
@@ -53,12 +53,3 @@ static void button_debounce(struct k_work *work)
 
     printk("Button pressed\n");
 }
-
-
-
-
-
-
-
-
-

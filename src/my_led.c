@@ -1,4 +1,4 @@
-#include "../include/my_led.h"
+#include "my_led.h"
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
 
@@ -48,7 +48,7 @@ int my_led_toggle(int ms)
     {
         return 1;
     }
-    
+
     k_work_reschedule(&led_work, K_NO_WAIT);
     return 0;
 }

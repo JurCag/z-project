@@ -49,30 +49,19 @@
 					"kind": "build",
 					"isDefault": true
 				},
-				// "command": "${userHome}/zephyrproject/.venv/bin/west",
-				// "args": [
-				// 	"build",
-				// 	"-p",
-				// 	"auto",
-				// 	"-b",
-				// 	"esp32_devkitc_wroom",
-				// 	"--",
-				// 	"-DDTC_OVERLAY_FILE=\"${workspaceFolder}/esp32_devkitc_wroom.overlay\""
-				// ],
-				"command": "/bin/zsh",
+				"command": "west",
 				"args": [
-					"-c",
-					"source ~/zephyrproject/.venv/bin/activate && export PATH=/usr/bin:$PATH && ${userHome}/zephyrproject/.venv/bin/west build -p auto -b esp32_devkitc_wroom -d ${workspaceFolder}/build -- -DDTC_OVERLAY_FILE=\"${workspaceFolder}/esp32_devkitc_wroom.overlay\""
+					"build",
+					"-p",
+					"auto",
+					"-b",
+					"esp32_devkitc_wroom",
+					"--",
+					"-DDTC_OVERLAY_FILE=\"${workspaceFolder}/esp32_devkitc_wroom.overlay\""
 				],
 				"problemMatcher": [
 					"$gcc"
-				],
-				"options": {
-					"cwd": "${userHome}/zephyrproject/zephyr",
-					"env": {
-					  "PATH": "${workspaceFolder}/.venv/bin:$PATH"
-					}
-				}
+				]
 			},
 			{
 				"label": "West Configurable Build",
@@ -80,7 +69,7 @@
 				"group": {
 					"kind": "build",
 				},
-				"command": "${userHome}/zephyrproject/.venv/bin/west",
+				"command": "west",
 				"args": [
 					"build",
 					"-p",
@@ -95,24 +84,14 @@
 			{
 				"label": "West Flash",
 				"type": "shell",
-				// "command": "${userHome}/zephyrproject/.venv/bin/west",
-				// "args": [
-				// 	"flash"
-				// ],
-				"command": "/bin/zsh",
+				"command": "west",
 				"args": [
-					"-c",
-					"source ~/zephyrproject/.venv/bin/activate && export PATH=/usr/bin:$PATH && ${userHome}/zephyrproject/.venv/bin/west flash -d ${workspaceFolder}/build"
+					"flash"
+				
 				],
 				"problemMatcher": [
 					"$gcc"
-				],
-				"options": {
-					"cwd": "${userHome}/zephyrproject/zephyr",
-					"env": {
-					  "PATH": "${workspaceFolder}/.venv/bin:$PATH"
-					}
-				}
+				]
 			}
 		],
 		"inputs": [

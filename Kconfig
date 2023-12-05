@@ -3,17 +3,9 @@
 # Copyright (c) 2018 Nordic Semiconductor ASA
 # SPDX-License-Identifier: Apache-2.0
 
-mainmenu "Dronetag task"
+mainmenu "Zephyr Application"
 
-menu "Application configuration"
-
-config SHELL_FOREGROUND_CMDS
-	bool "Shell foreground commands example"
-	default y
-
-config SHELL_DYNAMIC_CMDS
-	bool "Shell dynamic commands example"
-	default y
+menu "Dronetag task configuration"
 
 config MSGQ_SIZE
     int "Message Queue Size"

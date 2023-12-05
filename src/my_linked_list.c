@@ -1,4 +1,4 @@
-#include "../include/my_linked_list.h"
+#include "my_linked_list.h"
 #include <zephyr/kernel.h>
 #include <string.h>
 
@@ -20,24 +20,25 @@ int my_linked_list_alloc_and_append_data(const char *data)
 {
     void *tmp = NULL;
 
-    if (k_mem_slab_alloc(&s, &tmp, K_NO_WAIT) == 0)
+    if (k_mem_slab_alloc(&s, &tmp, K_NO_WAIT) != 0)
     {
-        linked_list_item_t *item = (linked_list_item_t *)tmp;
-        if ((strlen(data) + 1) > LINKED_LIST_DATA_ITEM_SIZE)
-        {
-            strncpy(item->msg.data, data, LINKED_LIST_DATA_ITEM_SIZE - 1);
-            item->msg.data[LINKED_LIST_DATA_ITEM_SIZE - 1] = '\0';
-        }
-        else
-        {
-            strncpy(item->msg.data, data, strlen(data));
-            item->msg.data[strlen(data)] = '\0';
-        }
-
-        sys_slist_append(&list, &item->node);
-        return strlen(item->msg.data);
+        return 0;
     }
-    return 0;
+
+    linked_list_item_t *item = (linked_list_item_t *)tmp;
+    if ((strlen(data) + 1) > LINKED_LIST_DATA_ITEM_SIZE)
+    {
+        strncpy(item->msg.data, data, LINKED_LIST_DATA_ITEM_SIZE - 1);
+        item->msg.data[LINKED_LIST_DATA_ITEM_SIZE - 1] = '\0';
+    }
+    else
+    {
+        strncpy(item->msg.data, data, strlen(data));
+        item->msg.data[strlen(data)] = '\0';
+    }
+
+    sys_slist_append(&list, &item->node);
+    return strlen(item->msg.data);
 }
 
 linked_list_item_data_t *my_linked_list_get_last_data(void)
@@ -46,15 +47,13 @@ linked_list_item_data_t *my_linked_list_get_last_data(void)
     sys_snode_t *tmp;
     tmp = sys_slist_peek_tail(&list);
 
-    if (tmp != NULL)
-    {
-        item = CONTAINER_OF(tmp, linked_list_item_t, node);
-        return &(item->msg);
-    }
-    else
+    if (tmp == NULL)
     {
         return NULL;
     }
+
+    item = CONTAINER_OF(tmp, linked_list_item_t, node);
+    return &(item->msg);
 }
 
 void my_linked_list_free_data(linked_list_item_data_t *data)
@@ -65,4 +64,3 @@ void my_linked_list_free_data(linked_list_item_data_t *data)
     sys_slist_find_and_remove(&list, &item->node);
     k_mem_slab_free(&s, item);
 }
-
